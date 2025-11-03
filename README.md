@@ -1,43 +1,112 @@
-# Sign in with Google Example
+# MAMZ E-commerce Website
 
-This is a complete, copy-pasteable example implementing "Sign in with Google" using Google Identity Services.
+A modern, responsive e-commerce website built with React, Vite, and Tailwind CSS featuring Google OAuth authentication.
 
-## Files
+## Features
 
-- `index.html`: Static frontend with Google Sign-in button and One-Tap prompt.
-- `server.js`: Node.js Express backend that verifies Google ID tokens.
+- **Google OAuth Authentication**: Secure login using Google accounts
+- **Responsive Design**: Mobile-first design with dark/light theme support
+- **Modern UI**: Built with Framer Motion animations and Tailwind CSS
+- **Product Categories**: New, Women, Men, Kids, Sale sections
+- **Shopping Cart**: Add/remove items with persistent storage
+- **User Profiles**: View and manage user information
+- **Footer Links**: Support, shipping, returns, privacy policy, etc.
 
-## Setup
+## Tech Stack
 
-1. **Google Cloud Console Setup**:
-   - Go to [Google Cloud Console](https://console.cloud.google.com/).
-   - Create or select a project.
-   - Enable the Google Identity API.
-   - Create OAuth 2.0 credentials (Web application type).
-   - Add `http://localhost:3000` to Authorized JavaScript origins.
-   - The client ID is already set in the code: `231323965497-be3oicog6388ghobtl758odck8h1jlu5.apps.googleusercontent.com`.
+- **Frontend**: React 19, Vite
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Authentication**: Google OAuth (@react-oauth/google)
+- **Routing**: React Router DOM
+- **State Management**: React Context API
 
-2. **Run the Backend**:
+## Google OAuth Setup
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the Google+ API
+4. Create OAuth 2.0 credentials
+5. Add `http://localhost:5173` to authorized redirect URIs
+6. Copy the Client ID and replace it in `src/main.jsx`
+
+## Installation
+
+1. Clone the repository:
    ```bash
-   cd google-signin-example
-   npm init -y
-   npm install express body-parser google-auth-library
-   node server.js
+   git clone <repository-url>
+   cd mamz-react
    ```
 
-3. **Access the App**:
-   - Open `http://localhost:3000` in your browser.
-   - Click the "Sign in with Google" button or use One-Tap.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Security Notes
+3. Set up Google OAuth:
+   - Follow the Google OAuth Setup section above
+   - Update the client ID in `src/main.jsx`
 
-- Never put `client_secret` in the frontend.
-- Always POST ID tokens to the backend over HTTPS.
-- Verify tokens server-side and create a server-side session.
-- In production, use HTTPS, proper session management, and set cookie flags (Secure, HttpOnly, SameSite).
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## References
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
 
-- [Google Identity Services JS Reference](https://developers.google.com/identity/gsi/web/reference/js-reference)
-- [Verifying Google ID Tokens](https://developers.google.com/identity/gsi/web/guides/verify-google-id-token)
-- [Backend Auth Guidance](https://developers.google.com/identity/sign-in/web/backend-auth)
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Navbar.jsx      # Navigation bar with user auth
+│   ├── Footer.jsx      # Site footer
+│   ├── LoginModal.jsx  # Google OAuth login modal
+│   ├── CartModal.jsx   # Shopping cart modal
+│   └── Hero.jsx        # Hero section
+├── contexts/           # React contexts
+│   └── AuthContext.jsx # Authentication context
+├── pages/             # Route components
+│   ├── Home.jsx       # Landing page
+│   ├── New.jsx        # New arrivals
+│   ├── Women.jsx      # Women's clothing
+│   ├── Men.jsx        # Men's clothing
+│   ├── Kids.jsx       # Kids' clothing
+│   ├── Sale.jsx       # Sale items
+│   ├── About.jsx      # About page
+│   ├── Contact.jsx    # Contact page
+│   └── ...            # Other pages
+├── utils/             # Utility functions
+│   └── auth.js        # Authentication helpers
+├── App.jsx            # Main app component
+├── main.jsx           # App entry point
+└── index.css          # Global styles
+```
+
+## Authentication
+
+The app uses Google OAuth for authentication. User data is stored in localStorage for persistence across sessions. The authentication flow includes:
+
+- Google OAuth popup for login
+- JWT token decoding for user information
+- Context-based state management
+- Automatic logout and storage cleanup
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
